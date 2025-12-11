@@ -1,0 +1,1016 @@
+/* フォントの定義 */
+@font-face {
+  font-family: 'Electroharmonix';
+  src: url('electroharmonix/electroharmonix.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ベーススタイル */
+:root {
+  --header-height: 80px;
+  --mobile-header-height: 60px;
+  --content-padding: 1.5rem;
+  --mobile-padding: 1rem;
+  --accent-cyan: #00f5ff;
+  --accent-magenta: #ff006e;
+  --accent-yellow: #ffea00;
+  --glass-bg: rgba(10, 10, 26, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Fredoka One', cursive, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: #0a0a1a;
+  color: white;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+/* ベースビデオスタイル */
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ローディング画面 */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 1s ease-out;
+}
+
+.loading-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-video {
+  width: 100%;
+  height: auto;
+  max-height: 100vh;
+  object-fit: contain;
+}
+
+/* インクナビゲーション */
+.ink-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(10, 10, 26, 0.9);
+  z-index: 1000;
+  padding: 10px 15px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  height: var(--header-height);
+  transition: all 0.3s ease;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-item {
+  position: relative;
+  margin: 0 8px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  flex: 0 1 auto;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.nav-item:hover::before {
+  opacity: 0.9;
+}
+
+.nav-item span {
+  font-family: 'Electroharmonix', monospace;
+  font-size: 1.2rem;
+  font-weight: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+  display: block;
+  line-height: 1.2;
+}
+
+.nav-item .cipher-text {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 0.55rem;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 5px rgba(0, 245, 255, 0.5);
+  margin-top: 4px;
+  display: block;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover .cipher-text {
+  color: white;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.nav-item:hover {
+  border-color: var(--glass-border);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-item:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* ビデオヘッダー */
+.video-header {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--header-height));
+  min-height: 400px;
+  overflow: hidden;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  background-color: #000;
+  z-index: 1;
+}
+
+.header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%);
+  z-index: 2;
+}
+
+/* メインコンテンツ */
+main {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: 0;
+  flex: 1;
+  width: 100%;
+}
+
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  position: relative;
+}
+
+.main-bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 0;
+}
+
+/* コンテンツボックス - グラスモーフィズム */
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem;
+  background: var(--glass-bg);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.content:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* セクションタイトルコンテナ */
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* メインタイトルスタイル */
+.content h1,
+.content h2 {
+  font-family: 'Electroharmonix', monospace;
+  font-weight: normal;
+  position: relative;
+  font-size: 4rem;
+  color: #fff;
+  text-align: center;
+  display: block;
+  padding: 1rem 2rem 0.5rem;
+  margin: 0;
+  z-index: 1;
+  text-shadow: 
+    2px 2px 0 rgba(0, 245, 255, 0.5),
+    -2px -2px 0 rgba(255, 0, 110, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3);
+  letter-spacing: 8px;
+  font-weight: 900;
+  line-height: 1.2;
+  width: 100%;
+}
+
+/* 英語サブタイトル */
+.content .cipher-text {
+  display: block;
+  font-family: 'Fredoka One', cursive, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.2rem;
+  color: var(--accent-cyan);
+  text-align: center;
+  margin: 0.5rem 0 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+/* ホバー時のエフェクト */
+.content h1:hover + .cipher-text,
+.content h2:hover + .cipher-text {
+  color: white;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+  transform: translateY(2px);
+}
+
+/* セクションタイトルの下線 */
+.section-title::after {
+  content: '';
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--accent-cyan) 20%, 
+    var(--accent-cyan) 80%, 
+    transparent 100%);
+  margin: 1.5rem auto 0;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.section-title:hover::after {
+  opacity: 1;
+  max-width: 300px;
+  height: 3px;
+}
+
+/* インク背景 */
+.content h1::before,
+.content h2::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 110%;
+  background-image: url('images/ink/ink3@4x.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.3;
+  z-index: -1;
+  filter: brightness(1.3) contrast(1.2) hue-rotate(180deg);
+}
+
+/* デジタルグリッチエフェクト */
+.content h1::after,
+.content h2::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* 各セクションのタイトルに異なるインク画像 */
+#home .content h1::before {
+  background-image: url('images/ink/ink3@4x.png');
+  opacity: 0.35;
+  filter: brightness(1.5) contrast(1.3) hue-rotate(200deg);
+}
+
+#work .content h2::before {
+  background-image: url('images/ink/ink4@4x.png');
+  opacity: 0.3;
+  filter: brightness(1.5) contrast(1.3) hue-rotate(280deg);
+}
+
+#skill .content h2::before {
+  background-image: url('images/ink/ink２@4x.png');
+  opacity: 0.3;
+  filter: brightness(1.5) contrast(1.3) hue-rotate(100deg);
+}
+
+#profile .content h2::before {
+  background-image: url('images/ink/アセット 1@4x.png');
+  opacity: 0.3;
+  filter: brightness(1.5) contrast(1.3) hue-rotate(320deg);
+}
+
+#contact .content h2::before {
+  background-image: url('images/ink/ink3@4x.png');
+  opacity: 0.3;
+  filter: brightness(1.5) contrast(1.3) hue-rotate(160deg);
+}
+
+.content h3 {
+  font-size: 1.8rem;
+  margin: 2rem 0 1rem;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 8px rgba(0, 245, 255, 0.3);
+  letter-spacing: 1px;
+}
+
+.content p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-weight: 400;
+}
+
+/* ワークグリッド */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+.work-item {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  font-size: 1.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.work-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 8px 24px rgba(0, 245, 255, 0.2);
+}
+
+/* スキルセクション */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.skill-category {
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.skill-category:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent-magenta);
+  box-shadow: 0 8px 24px rgba(255, 0, 110, 0.15);
+}
+
+.skill-category ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+.skill-category li {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 1.1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-weight: 400;
+  transition: all 0.3s ease;
+}
+
+.skill-category li:hover {
+  padding-left: 1rem;
+  color: var(--accent-cyan);
+  border-bottom-color: var(--accent-cyan);
+}
+
+.skill-category li:last-child {
+  border-bottom: none;
+}
+
+/* プロフィールセクション */
+.profile-content {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.profile-image {
+  flex: 0 0 220px;
+  height: 220px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--accent-magenta), var(--accent-cyan));
+  box-shadow: 0 8px 32px rgba(0, 245, 255, 0.3);
+  border: 2px solid var(--glass-border);
+}
+
+.profile-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* フッター */
+.ink-footer {
+  position: relative;
+  background: rgba(10, 10, 26, 0.95);
+  color: white;
+  padding: 4rem 2rem 2rem;
+  border-top: 1px solid var(--glass-border);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  margin-top: auto;
+}
+
+.ink-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(10, 10, 26, 0) 0%, rgba(10, 10, 26, 0.8) 100%);
+  z-index: 1;
+}
+
+.footer-content {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  z-index: 2;
+}
+
+.footer-section {
+  position: relative;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.footer-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-color: var(--accent-cyan);
+}
+
+.footer-title {
+  font-family: 'Electroharmonix', monospace;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  text-shadow: 
+    0 0 10px var(--accent-cyan),
+    0 0 20px var(--accent-cyan),
+    0 0 30px var(--accent-cyan);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.footer-section h4 {
+  font-family: 'Electroharmonix', monospace;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent-cyan);
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 8px rgba(0, 245, 255, 0.5);
+  letter-spacing: 1px;
+}
+
+.footer-section h4::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-cyan), transparent);
+  border-radius: 3px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.8rem;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.footer-links li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent-cyan);
+  transition: transform 0.3s ease;
+}
+
+.footer-links li:hover::before {
+  transform: translateX(5px);
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: block;
+  padding: 0.3rem 0;
+  font-family: 'Electroharmonix', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.footer-links a small {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 0.7rem;
+  margin-left: 5px;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 5px rgba(0, 245, 255, 0.5);
+  letter-spacing: 0.5px;
+}
+
+.footer-links a:hover {
+  color: white;
+  text-shadow: 0 0 8px var(--accent-cyan);
+  transform: translateX(5px);
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: white;
+  text-decoration: none;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.social-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, var(--ink-color, var(--accent-cyan)) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+  border-color: var(--accent-cyan);
+}
+
+.social-icon:hover::before {
+  opacity: 0.2;
+}
+
+.social-icon span {
+  position: absolute;
+  bottom: -25px;
+  font-size: 0.7rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.social-icon:hover span {
+  opacity: 1;
+  bottom: -20px;
+}
+
+.ink-splat {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/ink/ink3@4x.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 0.3s ease;
+  filter: brightness(1.5) saturate(1.5);
+}
+
+.social-icon:hover .ink-splat {
+  opacity: 0.6;
+  transform: scale(1.2);
+}
+
+.footer-bottom {
+  position: relative;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.ink-trail {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    var(--accent-cyan) 0%, 
+    var(--accent-magenta) 50%, 
+    var(--accent-yellow) 100%);
+  background-size: 200% 100%;
+  animation: inkFlow 3s ease-in-out infinite;
+}
+
+@keyframes inkFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .footer-section {
+    padding: 1.2rem;
+  }
+  
+  .footer-title {
+    font-size: 1.8rem;
+  }
+}
+
+/* コンタクトフォーム */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 1.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  color: white;
+  font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 16px rgba(0, 245, 255, 0.2);
+}
+
+.contact-form textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.contact-form button {
+  padding: 1.3rem 3rem;
+  background: linear-gradient(135deg, var(--accent-magenta), var(--accent-cyan));
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  font-family: 'Fredoka One', cursive;
+}
+
+.contact-form button:hover {
+  box-shadow: 0 6px 24px rgba(0, 245, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.contact-form button:active {
+  transform: translateY(0);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1024px) {
+  .content h1,
+  .content h2 {
+    font-size: 3.2rem;
+    padding: 1.5rem 3rem;
+  }
+  
+  .content {
+    padding: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .ink-nav {
+    height: var(--mobile-header-height);
+    padding: 5px 10px;
+  }
+  
+  .nav-item {
+    margin: 0 3px;
+    padding: 8px 12px;
+    min-width: auto;
+    flex: 1;
+    border-radius: 8px;
+  }
+  
+  .nav-item span {
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .video-header {
+    height: calc(100vh - var(--mobile-header-height));
+    min-height: 300px;
+  }
+  
+  .section {
+    padding: 3rem 1.5rem;
+  }
+  
+  .content {
+    padding: 2.5rem 2rem;
+  }
+  
+  .content h1,
+  .content h2 {
+    font-size: 2.5rem;
+    padding: 1.2rem 2rem;
+    letter-spacing: 2px;
+  }
+  
+  .content h3 {
+    font-size: 1.6rem;
+  }
+  
+  .content p {
+    font-size: 1.1rem;
+  }
+  
+  .work-grid,
+  .skills-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .profile-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .profile-image {
+    flex: 0 0 180px;
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content h1,
+  .content h2 {
+    font-size: 2rem;
+    padding: 1rem 1.5rem;
+    letter-spacing: 1px;
+  }
+  
+  .content {
+    padding: 2rem 1.5rem;
+  }
+  
+  .nav-item span {
+    font-size: 0.65rem;
+  }
+
+  /* Cipher text styles */
+  .cipher-text {
+    display: block;
+    font-size: 0.6rem;
+    color: rgba(0, 245, 255, 0.7);
+    margin-top: 0.2rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Orbitron', 'Audiowide', 'Rajdhani', sans-serif;
+    text-shadow: 0 0 5px rgba(0, 245, 255, 0.3);
+    font-weight: 500;
+  }
+  
+  /* Adjust spacing for cipher text in navigation */
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .nav-item .cipher-text {
+    font-size: 0.5rem;
+    margin-top: 0.1rem;
+  }
+  
+  /* Adjust spacing for section headers */
+  .content h1 + .cipher-text,
+  .content h2 + .cipher-text {
+    margin-top: -1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  /* Adjust spacing for the home section text */
+  #home p + .cipher-text {
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+  }
+}

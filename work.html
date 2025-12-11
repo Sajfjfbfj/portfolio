@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="theme-color" content="#0a0a1a" />
+  <title>My Work - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Animated Header Styles */
+    .animated-header {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
+      overflow: hidden;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .header-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    }
+
+    .header-subtitle {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      color: #00f0ff;
+      letter-spacing: 0.1em;
+    }
+
+    .header-decoration {
+      margin-top: 3rem;
+    }
+
+    .decoration-line {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+      margin: 1.5rem auto;
+      max-width: 200px;
+    }
+
+    .line-1 { width: 100%; }
+    .line-2 { width: 80%; }
+    .line-3 { width: 60%; }
+
+    @media (max-width: 768px) {
+      .header-title {
+        font-size: 2.5rem;
+      }
+      
+      .header-subtitle {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+  <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  <!-- ナビゲーション -->
+  <nav class="ink-nav">
+    <a href="index.html#home" class="nav-item" style="--bg-image: url('images/ink/ink3@4x.png')">
+      <span>UBZR</span>
+      <small class="cipher-text">HOME</small>
+    </a>
+    <a href="work.html" class="nav-item active" style="--bg-image: url('images/ink/ink4@4x.png')">
+      <span>JBEX</span>
+      <small class="cipher-text">WORK</small>
+    </a>
+    <a href="index.html#skill" class="nav-item" style="--bg-image: url('images/ink/ink２@4x.png')">
+      <span>FVXYY</span>
+      <small class="cipher-text">SKILL</small>
+    </a>
+    <a href="index.html#profile" class="nav-item" style="--bg-image: url('images/ink/アセット 1@4x.png')">
+      <span>CEBVSVR</span>
+      <small class="cipher-text">PROFILE</small>
+    </a>
+    <a href="index.html#contact" class="nav-item" style="--bg-image: url('images/ink/ink3@4x.png')">
+      <span>PBAGNPG</span>
+      <small class="cipher-text">CONTACT</small>
+    </a>
+  </nav>
+
+
+  <header class="animated-header">
+    <div class="header-content">
+      <h1 class="header-title">MY WORK</h1>
+      <div class="header-subtitle">PORTFOLIO</div>
+      <div class="header-decoration">
+        <div class="decoration-line line-1"></div>
+        <div class="decoration-line line-2"></div>
+        <div class="decoration-line line-3"></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="video-overlay"></div>
+    <video autoplay muted loop playsinline class="main-bg-video">
+      <source src="images/video/背景２.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    
+    <!-- ワークセクション -->
+    <section id="work" class="section">
+      <div class="content">
+        <div class="section-title">
+          <h2 class="typing-animation">MY WORK</h2>
+          <small class="cipher-text typing-animation">MY WORK</small>
+        </div>
+        <div class="work-grid">
+          <!-- 作品を追加するコンテナ -->
+          <div class="work-item">
+            <h3>Project 1</h3>
+            <p>プロジェクトの説明をここに記入してください。</p>
+          </div>
+          <div class="work-item">
+            <h3>Project 2</h3>
+            <p>プロジェクトの説明をここに記入してください。</p>
+          </div>
+          <div class="work-item">
+            <h3>Project 3</h3>
+            <p>プロジェクトの説明をここに記入してください。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- フッター -->
+  <footer class="ink-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#home">UBZR <small class="cipher-text">HOME</small></a></li>
+          <li><a href="work.html">JBEX <small class="cipher-text">WORK</small></a></li>
+          <li><a href="index.html#skill">FVXYY <small class="cipher-text">SKILL</small></a></li>
+          <li><a href="index.html#profile">CEBVSVR <small class="cipher-text">PROFILE</small></a></li>
+          <li><a href="index.html#contact">PBAGNPG <small class="cipher-text">CONTACT</small></a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="#" class="social-icon" style="--ink-color: #00f0ff">
+            <span>Twitter</span>
+            <div class="ink-splat"></div>
+          </a>
+          <a href="#" class="social-icon" style="--ink-color: #ff00aa">
+            <span>GitHub</span>
+            <div class="ink-splat"></div>
+          </a>
+          <a href="#" class="social-icon" style="--ink-color: #a0ff00">
+            <span>Instagram</span>
+            <div class="ink-splat"></div>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 INK STUDIO. All rights reserved.</p>
+      <div class="ink-trail"></div>
+    </div>
+  </footer>
+
+  <script>
+    // GSAP Animation
+    document.addEventListener('DOMContentLoaded', () => {
+      // Register ScrollTrigger plugin
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Header animation
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      
+      // Initial animation
+      tl.from('.header-title', {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        delay: 0.5
+      })
+      .from('.header-subtitle', {
+        y: 30,
+        opacity: 0,
+        duration: 0.8
+      }, '-=0.5')
+      .from('.decoration-line', {
+        scaleX: 0,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        transformOrigin: 'left center'
+      }, '-=0.5');
+
+      // Parallax effect on scroll
+      gsap.to('.header-content', {
+        y: (i, target) => -ScrollTrigger.maxScroll(window) * 0.1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.animated-header',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    });
+
+    // タッチデバイス用のハンドラー
+    document.addEventListener('DOMContentLoaded', function() {
+      function handleFirstTouch() {
+        document.body.classList.add('has-touch');
+        document.removeEventListener('touchstart', handleFirstTouch);
+      }
+      
+      // タッチイベントの検出
+      if ('ontouchstart' in window || navigator.maxTouchPoints) {
+        document.addEventListener('touchstart', handleFirstTouch, false);
+      }
+      
+      // モバイルメニューのトグル処理
+      const navItems = document.querySelectorAll('.nav-item');
+      navItems.forEach(item => {
+        item.addEventListener('click', function() {
+          // モバイルメニューを閉じる処理をここに追加（必要に応じて）
+        });
+      });
+    });
+  </script>
+  
+  <script src="main.js"></script>
+  <script src="js/typingAnimation.js"></script>
+</body>
+</html>
