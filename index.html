@@ -260,11 +260,12 @@
           <h2 class="typing-animation">CONTACT</h2>
           <small class="cipher-text typing-animation">CONTACT</small>
         </div>
-        <form class="contact-form" id="contactForm">
-          <input type="text" placeholder="お名前" required>
-          <input type="email" placeholder="メールアドレス" required>
-          <textarea placeholder="メッセージ" required></textarea>
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/xovgkgvd" method="POST">
+          <input type="text" name="name" placeholder="お名前" required>
+          <input type="email" name="email" placeholder="メールアドレス" required>
+          <textarea name="message" placeholder="メッセージ" required></textarea>
           <button type="submit">送信</button>
+          <div id="contactStatus" role="status" aria-live="polite" style="margin-top:10px;color:#cfc;"></div>
         </form>
       </div>
     </section>
@@ -1028,16 +1029,52 @@
         });
       });
 
-      // Contact form submission
+      // Contact form submission -> Formspree integration
       const contactForm = document.getElementById('contactForm');
       if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
           e.preventDefault();
-          const name = this.querySelector('input[type="text"]').value;
-          const email = this.querySelector('input[type="email"]').value;
-          const message = this.querySelector('textarea').value;
-          const mailtoLink = `mailto:sakisuzuki89@gmail.com?subject=ポートフォリオからのお問い合わせ - ${encodeURIComponent(name)}&body=${encodeURIComponent(`名前: ${name}\nメール: ${email}\n\nメッセージ:\n${message}`)}`;
-          window.location.href = mailtoLink;
+          const statusEl = document.getElementById('contactStatus');
+          if (statusEl) {
+            statusEl.style.color = '#cfc';
+            statusEl.textContent = '送信中…';
+          }
+
+          const formData = new FormData(this);
+
+          fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          }).then(response => {
+            if (response.ok) {
+              if (statusEl) {
+                statusEl.style.color = '#a6f3a6';
+                statusEl.textContent = '送信が完了しました。ありがとうございました。';
+              }
+              contactForm.reset();
+            } else {
+              response.json().then(data => {
+                if (statusEl) {
+                  statusEl.style.color = '#f3a6a6';
+                  statusEl.textContent = data && data.error ? `送信に失敗しました: ${data.error}` : '送信に失敗しました。別の方法でご連絡ください。';
+                }
+              }).catch(() => {
+                if (statusEl) {
+                  statusEl.style.color = '#f3a6a6';
+                  statusEl.textContent = '送信に失敗しました。';
+                }
+              });
+            }
+          }).catch(err => {
+            console.error('Contact submit error:', err);
+            if (statusEl) {
+              statusEl.style.color = '#f3a6a6';
+              statusEl.textContent = 'ネットワークエラーで送信できませんでした。';
+            }
+          });
         });
       }
     });
