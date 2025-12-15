@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, viewport-fit=cover" />
+  <title>MATOMA-遠的 紹介</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf_viewer.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../css/dropdown.css">
+  <style>
+    /* Enhanced Project Page Styling */
+    .project-intro {
+      position: relative;
+      z-index: 2;
+      padding: 2rem 0;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .project-intro .container {
+      background: rgba(10, 10, 26, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .project-intro h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(90deg, #00f5ff, #ff00aa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-url {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .project-url a {
+      color: #00f5ff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .project-url a:hover {
+      color: #ff00aa;
+      text-decoration: underline;
+    }
+
+    .project-intro h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      color: #00f5ff;
+      margin: 2.5rem 0 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid rgba(0, 245, 255, 0.3);
+    }
+
+    .project-intro h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      color: #ff00aa;
+      margin: 2rem 0 1rem;
+    }
+
+    .project-intro p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .features ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .features li {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.2rem;
+      border-radius: 8px;
+      border-left: 3px solid #00f5ff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .features li:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 245, 255, 0.2);
+    }
+
+    .project-details ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .project-details li {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      border: 1px solid rgba(255, 0, 170, 0.2);
+    }
+
+    .screenshot {
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .screenshot img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .screenshot img:hover {
+      transform: scale(1.02);
+    }
+
+    #pdf-viewer {
+      margin: 2rem 0;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    #pdf-viewer iframe {
+      display: block;
+      border: none;
+    }
+
+    .project-conclusion {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .project-intro .container {
+        padding: 1.5rem;
+        margin: 1rem;
+      }
+
+      .project-intro h1 {
+        font-size: 2rem;
+      }
+
+      .features ul,
+      .project-details ul {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ナビゲーション -->
+  <nav class="ink-nav">
+    <a href="../index.html" class="nav-item" style="--bg-image: url('../images/ink/ink3@4x.png')">
+      <span>UBZR</span>
+      <small class="cipher-text">HOME</small>
+    </a>
+    <div class="nav-item work-dropdown" style="--bg-image: url('../images/ink/ink4@4x.png')">
+      <div class="dropdown-container">
+        <button 
+          class="dropdown-trigger nav-link" 
+          id="workDropdownBtn"
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-controls="workDropdown">
+          <span>JBEX</span>
+          <small class="cipher-text">WORK</small>
+          <span class="arrow" aria-hidden="true">▼</span>
+        </button>
+        <ul 
+          class="dropdown-menu" 
+          id="workDropdown" 
+          role="menu" 
+          aria-labelledby="workDropdownBtn">
+          <li role="none"><a href="../index.html#work" class="dropdown-item" role="menuitem">All Works</a></li>
+          <li role="none"><a href="enteki.html" class="dropdown-item active" role="menuitem">MATOMA-遠的</a></li>
+          <li role="none"><a href="ibakyuren.html" class="dropdown-item" role="menuitem">茨城県弓道連盟（試作）</a></li>
+          <li role="none"><a href="ryusyokai.html" class="dropdown-item" role="menuitem">龍翔会</a></li>
+        </ul>
+      </div>
+    </div>
+    <a href="../index.html#skill" class="nav-item" style="--bg-image: url('../images/ink/ink２@4x.png')">
+      <span>FVXYY</span>
+      <small class="cipher-text">SKILL</small>
+    </a>
+    <a href="../index.html#profile" class="nav-item" style="--bg-image: url('../images/ink/アセット 1@4x.png')">
+      <span>CEBVSVR</span>
+      <small class="cipher-text">PROFILE</small>
+    </a>
+    <a href="../index.html#contact" class="nav-item" style="--bg-image: url('../images/ink/ink3@4x.png')">
+      <span>PBAGNPG</span>
+      <small class="cipher-text">CONTACT</small>
+    </a>
+  </nav>
+
+  <main>
+    <div class="video-overlay"></div>
+    <video autoplay muted loop playsinline class="main-bg-video">
+      <source src="../images/video/背景高画質化.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <div class="content project-intro">
+      <div class="container">
+        <h1>MATOMA - 遠的</h1>
+        <p class="project-url">URL: <a href="https://enteki.vercel.app/" target="_blank">https://enteki.vercel.app/</a></p>
+        
+        <section class="project-overview">
+          <h2>サイト概要</h2>
+          <p>MATOMA-遠的は、弓道の点数管理とチームメンバーの進捗を追跡するためのウェブアプリケーションです。個人の練習記録からチーム全体のパフォーマンス分析まで、総合的なサポートを提供します。</p>
+          
+          <div class="features">
+            <h3>主な機能</h3>
+            <ul>
+              <li>個人の点数記録と管理</li>
+              <li>チームメンバーとの進捗共有</li>
+              <li>詳細なパフォーマンス分析</li>
+              <li>直感的なUI/UXデザイン</li>
+              <li>レスポンシブ対応で様々なデバイスからアクセス可能</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="project-details">
+          <h2>技術スタック</h2>
+          <ul>
+            <li>コア技術: HTML5, CSS3, JavaScript (Vanilla JS)</li>
+            <li>UI/UX: Google Material Icons</li>
+            <li>データ可視化: Chart.js, chartjs-plugin-datalabels, chartjs-plugin-annotation</li>
+            <li>ホスティング: Vercel</li>
+            <li>バージョン管理: Git/GitHub</li>
+            <li>特徴: レスポンシブデザイン、マルチページ構成</li>
+          </ul>
+        </section>
+
+        <section class="project-documentation">
+          <h2>企画書</h2>
+          <div id="pdf-viewer" style="height: 800px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+            <iframe src="../images/PDF/MATOMA企画.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+          </div>
+        </section>
+
+        <section class="project-conclusion">
+          <h2>まとめ</h2>
+          <p>MATOMA-遠的は、弓道愛好家のための総合的な点数管理ツールとして、直感的な操作性と詳細な分析機能を兼ね備えています。チームでの利用を想定した機能も充実しており、個人のスキル向上からチーム全体のパフォーマンス管理までをサポートします。</p>
+          <p>実際のサイトは<a href="https://enteki.vercel.app/" target="_blank">こちら</a>からご覧いただけます。</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- フッター -->
+  <footer class="ink-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Links</h4>
+        <ul class="footer-links">
+          <li><a href="../index.html">UBZR <small class="cipher-text">HOME</small></a></li>
+          <li><a href="../index.html#work">JBEX <small class="cipher-text">WORK</small></a></li>
+          <li><a href="../index.html#skill">FVXYY <small class="cipher-text">SKILL</small></a></li>
+          <li><a href="../index.html#profile">CEBVSVR <small class="cipher-text">PROFILE</small></a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="#" class="social-icon" style="--ink-color: #00f0ff">
+            <span>Twitter</span>
+            <div class="ink-splat"></div>
+          </a>
+          <a href="#" class="social-icon" style="--ink-color: #ff00aa">
+            <span>GitHub</span>
+            <div class="ink-splat"></div>
+          </a>
+          <a href="#" class="social-icon" style="--ink-color: #a0ff00">
+            <span>Instagram</span>
+            <div class="ink-splat"></div>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 INK STUDIO. All rights reserved.</p>
+      <div class="ink-trail"></div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script src="../js/typingAnimation.js"></script>
+  <script src="../js/dropdown.js" defer></script>
+</body>
+</html>

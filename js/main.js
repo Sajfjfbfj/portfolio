@@ -5,6 +5,134 @@ let allowFire = false;
 let particles = [];
 const gravity = 0.35;
 
+// ドロップダウンメニューの制御
+function initDropdowns() {
+  const dropdowns = document.querySelectorAll('.work-dropdown');
+  
+  // 各ドロップダウンにイベントリスナーを追加
+  dropdowns.forEach(dropdown => {
+    const link = dropdown.querySelector('.nav-link');
+    const menu = dropdown.querySelector('.dropdown-menu');
+    
+    // デスクトップ用のホバーイベント
+    const handleMouseEnter = () => {
+      if (window.innerWidth > 768) {
+        menu.style.opacity = '1';
+        menu.style.visibility = 'visible';
+        menu.style.transform = 'translateX(-50%) translateY(0)';
+        menu.classList.add('active');
+      }
+    };
+    
+    const handleMouseLeave = () => {
+      if (window.innerWidth > 768) {
+        menu.style.opacity = '0';
+        menu.style.visibility = 'hidden';
+        menu.style.transform = 'translateX(-50%) translateY(10px)';
+        menu.classList.remove('active');
+      }
+    };
+    
+    // モバイル用のクリックイベント
+    const handleClick = (e) => {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isOpen = menu.classList.contains('active');
+        
+        // すべてのドロップダウンメニューを閉じる
+        document.querySelectorAll('.dropdown-menu').forEach(m => {
+          if (m !== menu) {
+            m.style.opacity = '0';
+            m.style.visibility = 'hidden';
+            m.style.transform = 'translateX(-50%) translateY(10px)';
+            m.classList.remove('active');
+          }
+        });
+        
+        // クリックしたメニューの表示/非表示を切り替え
+        if (!isOpen) {
+          menu.style.opacity = '1';
+          menu.style.visibility = 'visible';
+          menu.style.transform = 'translateX(-50%) translateY(0)';
+          menu.classList.add('active');
+        } else {
+          menu.style.opacity = '0';
+          menu.style.visibility = 'hidden';
+          menu.style.transform = 'translateX(-50%) translateY(10px)';
+          menu.classList.remove('active');
+        }
+      }
+    };
+    
+    // イベントリスナーの追加
+    dropdown.addEventListener('mouseenter', handleMouseEnter);
+    dropdown.addEventListener('mouseleave', handleMouseLeave);
+    link.addEventListener('click', handleClick);
+    
+    // リサイズイベントで状態をリセット
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        // デスクトップ表示に切り替わったらモバイル用の状態をリセット
+        menu.removeAttribute('style');
+        menu.classList.remove('active');
+      } else {
+        // モバイル表示に切り替わったらデスクトップ用の状態をリセット
+        menu.style.opacity = '0';
+        menu.style.visibility = 'hidden';
+        menu.style.transform = 'translateX(-50%) translateY(10px)';
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
+    // 初期化時に一度実行
+    handleResize();
+  });
+  
+  // ドキュメント全体のクリックイベントでメニューを閉じる
+  const handleDocumentClick = (e) => {
+    if (window.innerWidth <= 768) {
+      const isClickInsideDropdown = e.target.closest('.work-dropdown');
+      if (!isClickInsideDropdown) {
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+          menu.style.opacity = '0';
+          menu.style.visibility = 'hidden';
+          menu.style.transform = 'translateX(-50%) translateY(10px)';
+          menu.classList.remove('active');
+        });
+      }
+    }
+  };
+  
+  document.addEventListener('click', handleDocumentClick);
+  document.addEventListener('touchstart', handleDocumentClick);
+  
+  // クリーンアップ関数を返す
+  return () => {
+    document.removeEventListener('click', handleDocumentClick);
+    document.removeEventListener('touchstart', handleDocumentClick);
+  };
+}
+
+// DOMの読み込みが完了したら初期化
+document.addEventListener('DOMContentLoaded', () => {
+  // 既存のDOMContentLoadedイベントがある場合は、その中で実行
+  if (typeof initDropdowns === 'function') {
+    initDropdowns();
+  }
+});
+
+// 他のイベントリスナーと競合しないように、既存のDOMContentLoadedイベントを取得
+const existingOnLoad = window.onload;
+window.onload = function() {
+  if (existingOnLoad) existingOnLoad();
+  if (typeof initDropdowns === 'function') {
+    initDropdowns();
+  }
+};
+
 // CANVAS SETUP
 const canvas = document.getElementById("inkLiquidCanvas");
 const ctx = canvas.getContext("2d");

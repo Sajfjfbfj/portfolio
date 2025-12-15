@@ -8,6 +8,7 @@
   <title>My Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/dropdown.css">
 </head>
 <body class="loading">
   <!-- ナビゲーション -->
@@ -16,10 +17,32 @@
       <span>UBZR</span>
       <small class="cipher-text">HOME</small>
     </a>
-    <a href="work.html" class="nav-item" style="--bg-image: url('images/ink/ink4@4x.png')">
-      <span>JBEX</span>
-      <small class="cipher-text">WORK</small>
-    </a>
+    <div class="nav-item work-dropdown" style="--bg-image: url('images/ink/ink4@4x.png')">
+      <div class="dropdown-container">
+        <button 
+          class="dropdown-trigger nav-link" 
+          id="workDropdownBtn"
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-controls="workDropdown">
+          <span>JBEX</span>
+          <small class="cipher-text">WORK</small>
+          <span class="arrow" aria-hidden="true">▼</span>
+        </button>
+        <ul 
+          class="dropdown-menu" 
+          id="workDropdown" 
+          role="menu" 
+          aria-labelledby="workDropdownBtn">
+          <!-- 閉じるボタンを追加 -->
+          <button class="close-menu-btn" id="closeMenuBtn" aria-label="メニューを閉じる">✕</button>
+          <li role="none"><a href="#work" class="dropdown-item" role="menuitem">All Works</a></li>
+          <li role="none"><a href="web紹介/enteki.html" class="dropdown-item" role="menuitem">MATOMA-遠的</a></li>
+          <li role="none"><a href="web紹介/ibakyuren.html" class="dropdown-item" role="menuitem">茨城県弓道連盟（試作）</a></li>
+          <li role="none"><a href="web紹介/ryusyokai.html" class="dropdown-item" role="menuitem">龍翔会</a></li>
+        </ul>
+      </div>
+    </div>
     <a href="#skill" class="nav-item" style="--bg-image: url('images/ink/ink２@4x.png')">
       <span>FVXYY</span>
       <small class="cipher-text">SKILL</small>
@@ -34,8 +57,8 @@
     </a>
   </nav>
 
-  <!-- ローディング画面 -->
-  <div class="loading-screen">
+  <!-- ローディング画面（初回のみ表示） -->
+  <div class="loading-screen" id="loadingScreen">
     <video autoplay muted playsinline class="loading-video" id="loadingVideo">
       <source src="images/video/ローディングアニメーション.mp4" type="video/mp4">
       Your browser does not support the video tag.
@@ -43,7 +66,7 @@
   </div>
 
   <header class="video-header">
-    <video muted playsinline class="header-video" id="headerVideo">
+    <video muted playsinline class="header-video" id="headerVideo" style="display: none;">
       <source src="images/video/ロゴなし案１ (2).mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
@@ -68,138 +91,143 @@
     </section>
 
     <!-- ワークセクション -->
-    <section id="work" class="section">
-      <div class="content">
-        <div class="section-title">
-          <h2 class="typing-animation">ZL JBEQ</h2>
-          <small class="cipher-text typing-animation">MY WORK</small>
-        </div>
-        
-        <!-- RPG Battle Interface -->
-        <div class="rpg-battle-container">
-          <!-- Player Side (Left) -->
-          <div class="rpg-player-side">
-            <!-- Main Project (Player Character) -->
-            <div class="rpg-character active" data-id="RGSK-001">
-              <div class="character-sprite">
-                <img src="images/Postericon/龍翔会.png" alt="龍翔会 弓道部のロゴ" class="character-image">
-              </div>
-              <div class="character-stats">
-                <div class="character-name">龍翔会 弓道部</div>
-                <div class="hp-bar">
-                  <div class="hp-fill" style="width: 100%"></div>
-                </div>
-                <div class="character-level">Lv.99</div>
-                <div class="character-status">COMPLETED</div>
-              </div>
-            </div>
-            
-            <!-- Character/Project Selector -->
-            <div class="character-selector">
-              <div class="character-thumbnail" data-target="RGSK-001">
-                <img src="images/Postericon/龍翔会.png" alt="龍翔会 弓道部のサムネイル">
-                <span>龍翔会</span>
-              </div>
-              <div class="character-thumbnail" data-target="ENTEKI-001">
-                <img src="images/Postericon/aikonmato.png" alt="MATOMA - 遠的">
-                <span>MATOMA</span>
-              </div>
-              <div class="character-thumbnail" data-target="ZELDA-001">
-                <img src="images/Postericon/茨城県弓道連盟.png" alt="茨城県弓道連盟">
-                <span>茨城県弓道連盟</span>
-              </div>
-              <div class="character-thumbnail" data-target="PKMN-2024">
-                <img src="https://via.placeholder.com/80/2d2424/0f3460?text=PKMN" alt="ポケモン">
-                <span>ポートフォリオ（予定）</span>
-              </div>
+    <section id="work" class="work-section">
+      <div class="work-container">
+        <div class="work-header-area">
+          <h2 class="work-main-title typing-animation">ZL JBEQ</h2>
+          <div class="work-english-title typing-animation" data-delay="500">MY CREATIVE WORKS</div>
+          
+          <div class="filter-area">
+            <div class="filter-label">(FILTER)</div>
+            <div class="filter-buttons">
+              <button class="filter-btn active" data-filter="all">すべて</button>
+              <button class="filter-btn" data-filter="webサイト">Webサイト</button>
+              <button class="filter-btn" data-filter="illustration">イラスト</button>
+              <button class="filter-btn" data-filter="poster">ポスター</button>
             </div>
           </div>
-          
-          <!-- Battle Log (Right) -->
-          <div class="rpg-battle-log">
-            <div class="log-container">
-              <div class="log-entry">
-                <span class="log-time">[2024.11.23]</span>
-                <span class="log-message">大会・審査成績を更新しました</span>
-              </div>
-              <div class="log-entry">
-                <span class="log-time">[2024.11.23]</span>
-                <span class="log-message">大会・審査要項を更新しました</span>
-              </div>
-              <div class="log-entry">
-                <span class="log-time">[2024.10.20]</span>
-                <span class="log-message">大会・審査要項を更新しました</span>
-              </div>
-              <div class="log-entry">
-                <span class="log-time">[2024.10.20]</span>
-                <span class="log-message">大会・審査成績を更新しました</span>
-              </div>
-              <div class="log-entry">
-                <span class="log-time">[2024.09.21]</span>
-                <span class="log-message">大会・審査成績を更新しました</span>
-              </div>
-            </div>
-            
-            <!-- Project Details -->
-            <div class="project-details" data-project="RGSK-001">
-              <h3>龍翔会 弓道部</h3>
-              <p class="project-description">茨城県龍ヶ崎市を拠点とする弓道団体。初心者教室から大会出場まで、弓道の魅力を伝える活動をしています。</p>
-              <div class="project-meta">
-                <div class="project-tags">
-                  <span class="tag">#Web制作</span>
-                  <span class="tag">#レスポンシブ</span>
-                  <span class="tag">#WordPress</span>
-                </div>
-                <a href="https://ryugasakikyudo.vercel.app/" target="_blank" class="battle-button">サイトを見る</a>
-              </div>
-            </div>
-            
-            <div class="project-details hidden" data-project="ENTEKI-001">
-              <h3>MATOMA - 遠的</h3>
-              <p class="project-description">弓道の遠的練習用の記録・分析アプリ。個人の記録管理からチームの進捗管理まで、弓道の上達をサポートします。</p>
-              <div class="project-meta">
-                <div class="project-tags">
-                  <span class="tag">#Webアプリ</span>
-                  <span class="tag">#弓道</span>
-                  <span class="tag">#データ分析</span>
-                </div>
-                <a href="https://enteki.vercel.app/" target="_blank" class="battle-button">サイトを見る</a>
-              </div>
-            </div>
-            
-            <div class="project-details hidden" data-project="ZELDA-001">
-              <h3>茨城県弓道連盟（模倣）</h3>
-              <p class="project-description">茨城県弓道連盟の公式情報サイト。大会スケジュール、審査情報、講習会など弓道活動に関する総合的な情報を提供・管理するポータル。</p>
-              <div class="project-meta">
-                <div class="project-tags">
-                  <span class="tag">#Web制作</span>
-                  <span class="tag">#レスポンシブ</span>
-                  <span class="tag">#WordPress</span>
-                </div>
-                <a href="https://ibakyuren.vercel.app/" target="_blank" class="battle-button">サイトを見る</a>
-              </div>
-            </div>
-            
-            <div class="project-details hidden" data-project="PKMN-2024">
-              <h3>ポケットモンスター スカーレット</h3>
-              <p class="project-description">新たな地方で始まるポケモンライフ。すべてのポケモンをゲットだぜ！</p>
-              <div class="project-meta">
-                <div class="project-tags">
-                  <span class="tag">#RPG</span>
-                  <span class="tag">#コレクション</span>
-                </div>
-                <span class="battle-button disabled">IN PROGRESS</span>
-              </div>
-            </div>
-            
-            <!-- Battle Menu -->
-            <div class="battle-menu">
-              <button class="battle-command" data-command="details">詳細を見る</button>
-            </div>
+        </div>
+
+        <div class="works-grid">
+          <div class="work-card" data-category="webサイト">
+            <a href="web紹介/enteki.html" target="_blank" rel="noopener noreferrer">
+              <img src="images/Postericon/aikonmato.png" alt="MATOMA-遠的">
+            </a>
+            <h3 class="work-card-title">MATOMA-遠的</h3>
+          </div>
+          <div class="work-card" data-category="illustration">
+            <img src="images/illustrator/©龍翔会.png" 
+                 alt="龍翔会ヘッダー案" 
+                 class="lightbox-trigger"
+                 data-title="龍翔会ヘッダー案"
+                 data-description="龍翔会のウェブサイト用に作成したヘッダーイラストです。和のテイストをモダンにアレンジしました。"
+                 data-tags="イラスト, ヘッダー, 和風">
+            <h3 class="work-card-title">龍翔会ヘッダー案</h3>
+          </div>
+          <div class="work-card" data-category="poster">
+            <img src="images/Postericon/初心者教室.png" 
+                 alt="龍翔会初心者教室ポスター" 
+                 class="lightbox-trigger"
+                 data-title="龍翔会初心者教室ポスター"
+                 data-description="龍翔会の初心者教室ポスターです。弓道のイメージを色と文字、デザインに表してみました"
+                 data-tags="ポスター, イベント">
+            <h3 class="work-card-title">龍翔会初心者教室ポスター</h3>
+          </div>
+          <div class="work-card" data-category="webサイト">
+            <a href="web紹介/ryusyokai.html" target="_blank" rel="noopener noreferrer">
+              <img src="images/Postericon/龍翔会.png" alt="龍翔会">
+            </a>
+            <h3 class="work-card-title">龍翔会</h3>
+          </div>
+          <div class="work-card" data-category="illustration">
+            <img src="images/illustrator/MATOMA.png" 
+                 alt="MATOMA-遠的X用ヘッダー" 
+                 class="lightbox-trigger"
+                 data-title="MATOMA-遠的X用ヘッダー"
+                 data-description="MATOMA-遠的のX用ヘッダーです。皆さんに覚えやすいようシンプルなものにいたしました。"
+                 data-tags="イラスト">
+            <h3 class="work-card-title">MATOMA-遠的のX用ヘッダー</h3>
+          </div>
+          <div class="work-card" data-category="poster">
+            <img src="images/Postericon/見学受付中.png" 
+                 alt="見学受付中" 
+                 class="lightbox-trigger"
+                 data-title="見学受付中"
+                 data-description="龍翔会見学受付中のポスターです。和を基本に落ち着いた感じでデザインしました。"
+                 data-tags="ポスター">
+            <h3 class="work-card-title">龍翔会見学受付中</h3>
+          </div>
+          <div class="work-card" data-category="webサイト">
+            <a href="web紹介/ibakyuren.html" target="_blank" rel="noopener noreferrer">
+              <img src="images/Postericon/茨城県弓道連盟.png" alt="茨城県弓道連盟">
+            </a>
+            <h3 class="work-card-title">茨城県弓道連盟（模倣）</h3>
+          </div>
+          <div class="work-card" data-category="illustration">
+            <img src="images/illustrator/弓道ポスター.png" 
+                 alt="弓道ポスター" 
+                 class="lightbox-trigger"
+                 data-title="弓道ポスター"
+                 data-description="一番最初にillustrationで自身で初めて作ったものです。部活動紹介っぽく書いてみようと思い作ってみました。"
+                 data-tags="イラスト">
+            <h3 class="work-card-title">弓道ポスター</h3>
+          </div>
+          <div class="work-card" data-category="illustration">
+            <img src="images/Postericon/1.png" 
+                 alt="アイコン" 
+                 class="lightbox-trigger"
+                 data-title="アイコン"
+                 data-description="シンプルシックで作りたいなと思い自身のアイコンを作ってみました。"
+                 data-tags="イラスト">
+            <h3 class="work-card-title">アイコン</h3>
+          </div>
+          <div class="work-card" data-category="illustration">
+            <img src="images/Postericon/1000005074.png" 
+                 alt="的" 
+                 class="lightbox-trigger"
+                 data-title="的"
+                 data-description="市松模様が入った的です。"
+                 data-tags="イラスト">
+            <h3 class="work-card-title">的</h3>
+          </div>
+          <div class="work-card" data-category="illustration">
+            <img src="images/Postericon/aikonmato.png" 
+                 alt="MATOMA-遠的　icon" 
+                 class="lightbox-trigger"
+                 data-title="MATOMA-遠的　icon"
+                 data-description="MATOMA-遠的のiconです。遠的の的の一種であるカラフルな的をモチーフにしてみました。"
+                 data-tags="イラスト">
+            <h3 class="work-card-title">MATOMA-遠的　アイコン</h3>
+          </div>
+          <div class="work-card" data-category="illustration">
+            <img src="images/Postericon/アイコンリング-(1).png" 
+                 alt="アイコンリング" 
+                 class="lightbox-trigger"
+                 data-title="アイコンリング"
+                 data-description="弓道をモチーフに日本伝統技巧の金継ぎと日本の象徴である桜をモチーフに作ってみました。"
+                 data-tags="イラスト">
+            <h3 class="work-card-title">アイコンリング</h3>
+          </div>
+          <div class="work-card" data-category="illustration">
+            <img src="images/Postericon/龍翔会.png" 
+                 alt="龍翔会アイコン" 
+                 class="lightbox-trigger"
+                 data-title="龍翔会アイコン"
+                 data-description="出会いの春であるように、弓道に入ってたくさんの出会いがある様に春の温かさをイメージしながら作りました"
+                 data-tags="イラスト">
+            <h3 class="work-card-title">龍翔会アイコン</h3>
+          </div>
+          <div class="work-card" data-category="poster">
+            <img src="images/Postericon/弓道ポスター１.png" 
+                 alt="龍翔会ポスター案" 
+                 class="lightbox-trigger"
+                 data-title="龍翔会ポスター案"
+                 data-description="龍翔会ポスター案です。背景を和紙にしてどうしたら見えやすいかなど考えていきました"
+                 data-tags="ポスター">
+            <h3 class="work-card-title">龍翔会ポスター案</h3>
           </div>
         </div>
       </div>
-    </section>
     </section>
 
     <!-- スキルセクション -->
@@ -816,40 +844,56 @@
   </style>
 
   <script>
-    // ローディング状態のクラスを削除
-    document.body.classList.remove('loading');
-    
-    // ローディングアニメーションの制御
-    window.addEventListener('load', function() {
-      const loadingScreen = document.querySelector('.loading-screen');
-      const loadingVideo = document.getElementById('loadingVideo');
-      const headerVideo = document.getElementById('headerVideo');
-      
-      // 動画が終了したらフェードアウトし、ヘッダービデオを再生
-      function finishLoading() {
-        loadingScreen.classList.add('fade-out');
-        
-        // ヘッダービデオを再生
-        if (headerVideo) {
-          headerVideo.play().catch(e => console.error('ヘッダービデオの再生に失敗しました:', e));
-        }
-        
-        // アニメーション終了後に要素を削除
-        setTimeout(() => {
-          loadingScreen.remove();
-        }, 500);
+    // セッションストレージをチェックして初回アクセスかどうかを確認
+    if (sessionStorage.getItem('hasShownLoading') === 'true') {
+      // すでに表示済みの場合はローディング画面を非表示に
+      const loadingScreen = document.getElementById('loadingScreen');
+      if (loadingScreen) {
+        loadingScreen.style.display = 'none';
       }
+      document.body.classList.remove('loading');
       
-      // ローディング動画が終了したら
-      loadingVideo.addEventListener('ended', finishLoading);
+      // ヘッダービデオを表示して再生
+      const headerVideo = document.getElementById('headerVideo');
+      if (headerVideo) {
+        headerVideo.style.display = 'block';
+        headerVideo.play().catch(e => console.log('Header video play failed:', e));
+      }
+    } else {
+      // 初回アクセスの場合、セッションストレージにフラグを設定
+      sessionStorage.setItem('hasShownLoading', 'true');
       
-      // 念のため、動画が再生できない場合のフォールバック
-      setTimeout(() => {
-        if (!loadingVideo.ended) {
-          finishLoading();
+      // ローディング状態のクラスを削除
+      document.body.classList.remove('loading');
+
+      // ローディング動画の処理
+      const loadingVideo = document.getElementById('loadingVideo');
+      if (loadingVideo) {
+        // 動画が終了したらフェードアウト
+        function finishLoading() {
+          const loadingScreen = document.getElementById('loadingScreen');
+          if (loadingScreen) {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+              loadingScreen.style.display = 'none';
+              // ローディング完了後にヘッダービデオを表示して再生
+              const headerVideo = document.getElementById('headerVideo');
+              if (headerVideo) {
+                headerVideo.style.display = 'block';
+                headerVideo.play().catch(e => console.log('Header video play failed:', e));
+              }
+            }, 500);
+          }
+          document.body.classList.remove('loading');
         }
-      }, 5000); // 5秒経っても動画が終了しない場合のフォールバック
-    });
+        
+        // ローディング動画が終了したら
+        loadingVideo.addEventListener('ended', finishLoading);
+        
+        // 念のため、動画が再生できない場合のフォールバック
+        setTimeout(finishLoading, 5000);
+      }
+    }
   </script>
   <script>
     // タッチデバイス用のハンドラーを追加
@@ -1121,7 +1165,283 @@
     </div>
   </footer>
 
+  <!-- Lightbox Modal -->
+  <div id="imageModal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-container">
+      <button class="close-modal" aria-label="閉じる">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      
+      <button class="modal-nav prev" aria-label="前の画像">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      
+      <div class="modal-content-container">
+        <div class="modal-loading"></div>
+        <img class="modal-content" id="modalImage" alt="拡大画像">
+        
+        <div class="modal-footer">
+          <h3 class="modal-title"></h3>
+          <p class="modal-description"></p>
+          <div class="modal-tags"></div>
+        </div>
+      </div>
+      
+      <button class="modal-nav next" aria-label="次の画像">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Lightbox functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize filter functionality
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const workCards = document.querySelectorAll('.work-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Remove active class from all buttons
+          filterBtns.forEach(b => b.classList.remove('active'));
+          // Add active class to clicked button
+          btn.classList.add('active');
+
+          const filterValue = btn.getAttribute('data-filter');
+
+          workCards.forEach(card => {
+            if (filterValue === 'all') {
+              card.style.display = 'block';
+            } else {
+              const category = card.getAttribute('data-category');
+              if (category === filterValue) {
+                card.style.display = 'block';
+              } else {
+                card.style.display = 'none';
+              }
+            }
+          });
+        });
+      });
+
+      // Lightbox functionality
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      const modalTitle = document.querySelector('.modal-title');
+      const modalDescription = document.querySelector('.modal-description');
+      const modalTags = document.querySelector('.modal-tags');
+      const loadingIndicator = document.querySelector('.modal-loading');
+      const closeBtn = document.querySelector('.close-modal');
+      const prevBtn = document.querySelector('.modal-nav.prev');
+      const nextBtn = document.querySelector('.modal-nav.next');
+      
+      let currentImage = null;
+      let isAnimating = false;
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      // Open modal function
+      function openModal(imgElement) {
+        if (isAnimating || !imgElement) return;
+        
+        isAnimating = true;
+        currentImage = imgElement;
+        
+        // Show modal
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Set modal content
+        const title = imgElement.getAttribute('data-title') || imgElement.alt || '';
+        const description = imgElement.getAttribute('data-description') || '';
+        const tags = imgElement.getAttribute('data-tags') ? 
+          imgElement.getAttribute('data-tags').split(',') : [];
+        
+        // Update text content
+        modalTitle.textContent = title;
+        modalDescription.textContent = description;
+        
+        // Update tags
+        modalTags.innerHTML = tags.map(tag => 
+          `<span class="tag">#${tag.trim()}</span>`
+        ).join('');
+        
+        // Reset loading indicator
+        loadingIndicator.style.display = 'block';
+        modalImg.style.opacity = '0';
+        
+        // Force reflow to ensure animation runs
+        void modal.offsetWidth;
+        
+        // Start animation
+        modal.classList.add('show');
+        
+        // Preload image
+        const img = new Image();
+        img.onload = () => {
+          modalImg.src = imgElement.src;
+          modalImg.alt = imgElement.alt || title;
+          
+          // Animate after image loads
+          setTimeout(() => {
+            modalImg.style.opacity = '1';
+            loadingIndicator.style.display = 'none';
+            isAnimating = false;
+          }, 50);
+        };
+        
+        img.onerror = () => {
+          modalImg.alt = '画像の読み込みに失敗しました';
+          loadingIndicator.style.display = 'none';
+          isAnimating = false;
+        };
+        
+        img.src = imgElement.src;
+      }
+
+      // Close modal function
+      function closeModal() {
+        if (isAnimating || !modal.classList.contains('show')) return;
+        isAnimating = true;
+        
+        modal.classList.remove('show');
+        
+        // Reset after animation
+        setTimeout(() => {
+          modal.style.display = 'none';
+          modalImg.style.opacity = '0';
+          modalImg.src = '';
+          currentImage = null;
+          isAnimating = false;
+          document.body.style.overflow = 'auto';
+          
+          // Reset loading indicator
+          loadingIndicator.style.display = 'block';
+        }, 250);
+      }
+
+      // Navigate between images
+      function navigate(direction) {
+        if (isAnimating) return;
+        
+        const images = Array.from(document.querySelectorAll('.lightbox-trigger'));
+        if (images.length <= 1) return;
+        
+        let currentIndex = currentImage ? images.indexOf(currentImage) : -1;
+        
+        if (direction === 'next') {
+          currentIndex = (currentIndex + 1) % images.length;
+        } else {
+          currentIndex = (currentIndex - 1 + images.length) % images.length;
+        }
+        
+        // Only navigate if different from current image
+        if (currentIndex !== images.indexOf(currentImage)) {
+          openModal(images[currentIndex]);
+        }
+      }
+
+      // Touch event handlers for swipe
+      function handleTouchStart(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }
+
+      function handleTouchEnd(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }
+
+      function handleSwipe() {
+        const diff = touchStartX - touchEndX;
+        
+        // Swipe threshold (pixels)
+        const threshold = 50;
+        
+        if (Math.abs(diff) > threshold) {
+          if (diff > 0) {
+            navigate('next');
+          } else {
+            navigate('prev');
+          }
+        }
+      }
+
+      // Image click event
+      document.querySelectorAll('.lightbox-trigger').forEach(img => {
+        img.addEventListener('click', function(e) {
+          e.preventDefault();
+          openModal(this);
+        });
+        
+        // Add tabindex for keyboard navigation
+        img.setAttribute('tabindex', '0');
+        
+        // Keyboard navigation (Enter/Space to open)
+        img.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openModal(this);
+          }
+        });
+      });
+
+      // Close button event
+      closeBtn.addEventListener('click', closeModal);
+      
+      // Navigation buttons
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navigate('prev');
+      });
+      
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navigate('next');
+      });
+      
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('show')) return;
+        
+        switch(e.key) {
+          case 'Escape':
+            e.preventDefault();
+            closeModal();
+            break;
+          case 'ArrowLeft':
+            e.preventDefault();
+            navigate('prev');
+            break;
+          case 'ArrowRight':
+            e.preventDefault();
+            navigate('next');
+            break;
+        }
+      });
+      
+      // Touch events
+      modal.addEventListener('touchstart', handleTouchStart, { passive: true });
+      modal.addEventListener('touchend', handleTouchEnd, { passive: true });
+      
+      // Close on background click
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal || e.target.classList.contains('modal-overlay')) {
+          closeModal();
+        }
+      });
+    });
+  </script>
+
   <script src="main.js"></script>
   <script src="js/typingAnimation.js"></script>
+  <script src="js/dropdown.js" defer></script>
 </body>
 </html>

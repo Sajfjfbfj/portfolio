@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, viewport-fit=cover" />
+  <title>龍翔会 弓道部</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf_viewer.min.css">
+  <link rel="stylesheet" href="../css/dropdown.css">
+</head>
+<body>
+  <!-- ナビゲーション -->
+  <nav class="ink-nav">
+    <a href="../index.html" class="nav-item" style="--bg-image: url('../images/ink/ink3@4x.png')">
+      <span>UBZR</span>
+      <small class="cipher-text">HOME</small>
+    </a>
+    <div class="nav-item work-dropdown" style="--bg-image: url('../images/ink/ink4@4x.png')">
+      <div class="dropdown-container">
+        <button 
+          class="dropdown-trigger nav-link" 
+          id="workDropdownBtn"
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-controls="workDropdown">
+          <span>JBEX</span>
+          <small class="cipher-text">WORK</small>
+          <span class="arrow" aria-hidden="true">▼</span>
+        </button>
+        <ul 
+          class="dropdown-menu" 
+          id="workDropdown" 
+          role="menu" 
+          aria-labelledby="workDropdownBtn">
+          <li role="none"><a href="../index.html#work" class="dropdown-item" role="menuitem">All Works</a></li>
+          <li role="none"><a href="enteki.html" class="dropdown-item" role="menuitem">MATOMA-遠的</a></li>
+          <li role="none"><a href="ibakyuren.html" class="dropdown-item" role="menuitem">茨城県弓道連盟（試作）</a></li>
+          <li role="none"><a href="ryusyokai.html" class="dropdown-item active" role="menuitem">龍翔会</a></li>
+        </ul>
+      </div>
+    </div>
+    <a href="../index.html#skill" class="nav-item" style="--bg-image: url('../images/ink/ink２@4x.png')">
+      <span>FVXYY</span>
+      <small class="cipher-text">SKILL</small>
+    </a>
+    <a href="../index.html#profile" class="nav-item" style="--bg-image: url('../images/ink/アセット 1@4x.png')">
+      <span>CEBVSVR</span>
+      <small class="cipher-text">PROFILE</small>
+    </a>
+    <a href="../index.html#contact" class="nav-item" style="--bg-image: url('../images/ink/ink3@4x.png')">
+      <span>PBAGNPG</span>
+      <small class="cipher-text">CONTACT</small>
+    </a>
+  </nav>
+
+  <main>
+    <div class="video-overlay"></div>
+    <video autoplay muted loop playsinline class="main-bg-video">
+      <source src="../images/video/背景高画質化.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- ここにページ固有のコンテンツを追加 -->
+    <div class="content">
+      <!-- 既存のコンテンツをここに移動 -->
+    </div>
+  </main>
+
+  <!-- フッター -->
+  <footer class="ink-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Links</h4>
+        <ul class="footer-links">
+          <li><a href="../index.html">UBZR <small class="cipher-text">HOME</small></a></li>
+          <li><a href="../index.html#work">JBEX <small class="cipher-text">WORK</small></a></li>
+          <li><a href="../index.html#skill">FVXYY <small class="cipher-text">SKILL</small></a></li>
+          <li><a href="../index.html#profile">CEBVSVR <small class="cipher-text">PROFILE</small></a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="#" class="social-icon" style="--ink-color: #00f0ff">
+            <span>Twitter</span>
+            <div class="ink-splat"></div>
+          </a>
+          <a href="#" class="social-icon" style="--ink-color: #ff00aa">
+            <span>GitHub</span>
+            <div class="ink-splat"></div>
+          </a>
+          <a href="#" class="social-icon" style="--ink-color: #a0ff00">
+            <span>Instagram</span>
+            <div class="ink-splat"></div>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 INK STUDIO. All rights reserved.</p>
+      <div class="ink-trail"></div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script src="../js/typingAnimation.js"></script>
+  <script src="../js/dropdown.js" defer></script>
+</body>
+</html>
