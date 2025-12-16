@@ -4,24 +4,6 @@
   overflow: visible;
 }
 
-.dropdown-menu {
-  display: block;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s ease, visibility 0.25s ease;
-}
-
-.dropdown-menu.active {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-.dropdown-menu.active li {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 .dropdown-container {
   position: relative;
   display: block;
@@ -36,7 +18,7 @@
   background: none;
   border: none;
   color: white;
-  font-family: 'Electroharmonix', sans-serif;
+  font-family: 'Fredoka One', 'Electroharmonix', Arial, sans-serif;
   font-size: 1.1rem;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -45,15 +27,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0;
   position: relative;
   z-index: 10;
+  transition: all 0.3s ease;
 }
 
 .dropdown-trigger .arrow {
   display: none;
-  font-size: 0.6em;
-  margin-left: 5px;
+  font-size: 0.6rem;
+  margin-top: 2px;
   transition: transform 0.3s ease;
   color: var(--accent-cyan, #00f5ff);
 }
@@ -61,8 +43,8 @@
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
-  transform: translateY(10px);
+  left: 50%;
+  transform: translateX(-50%);
   min-width: 100%;
   background: rgba(10, 10, 26, 0.95);
   backdrop-filter: blur(16px);
@@ -74,9 +56,7 @@
   margin: 10px 0 0 0;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, 
-              transform 0.3s ease,
-              visibility 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
   z-index: 2000;
   border: 1px solid rgba(255, 255, 255, 0.1);
   pointer-events: none;
@@ -85,7 +65,7 @@
 
 .dropdown-menu li {
   margin: 0;
- opacity: 1; 
+  opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -137,16 +117,12 @@
 .dropdown-menu.active {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
   pointer-events: auto;
-  animation: fadeIn 0.3s ease-out forwards;
 }
 
-/* モバイル用の全画面メニュースタイル */
 /* モバイル用閉じるボタン */
 .close-menu-btn {
-  display: none;
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 20px;
   width: 40px;
@@ -179,6 +155,7 @@
   outline: none;
 }
 
+/* モバイルスタイル */
 @media (max-width: 768px) {
   .dropdown-trigger .arrow {
     display: inline-block;
@@ -188,66 +165,6 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.95);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .dropdown-menu.active {
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .dropdown-menu li {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-    margin: 10px 0;
-    width: 100%;
-    text-align: center;
-  }
-  
-  .dropdown-menu.active li {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.1s;
-  }
-  
-  .dropdown-menu li:nth-child(1) { transition-delay: 0.1s; }
-  .dropdown-menu li:nth-child(2) { transition-delay: 0.15s; }
-  .dropdown-menu li:nth-child(3) { transition-delay: 0.2s; }
-  .dropdown-menu li:nth-child(4) { transition-delay: 0.25s; }
-  
-  .dropdown-item {
-    font-size: 1.5rem;
-    padding: 15px 0;
-    display: block;
-    color: white;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-  
-  .dropdown-item:hover {
-    color: #00f5ff;
-    transform: scale(1.05);
-  }
-  
-  .dropdown-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     width: 100%;
     height: 100vh;
     min-height: -webkit-fill-available;
@@ -291,60 +208,22 @@
   .dropdown-menu li:nth-child(3) { transition-delay: 0.2s; }
   .dropdown-menu li:nth-child(4) { transition-delay: 0.25s; }
 
-  /* 閉じるボタン */
-  .close-menu-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
+  .dropdown-item {
+    font-size: 1.5rem;
+    padding: 15px 0;
+    display: block;
     color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
-    z-index: 10000;
-    display: none;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-  }
-
-  .close-menu-btn.visible {
-    display: flex;
-  }
-
-  .close-menu-btn:hover {
-    opacity: 1;
-    background: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    transition: all 0.3s ease;
   }
   
-  .dropdown-item {
-    padding: 0.8rem 1.5rem;
-    font-size: 1.1rem;
+  .dropdown-item:hover {
+    color: #00f5ff;
+    transform: scale(1.05);
   }
-}
-
-/* アニメーション */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideIn {
-  from { 
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to { 
-    opacity: 1;
-    transform: translateY(0);
+  
+  .close-menu-btn {
+    display: flex;
   }
 }
 
@@ -353,11 +232,10 @@
   .work-dropdown:hover .dropdown-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);
     pointer-events: auto;
   }
   
-  .dropdown-trigger::after {
+    .dropdown-trigger::after {
     content: '▼';
     position: absolute;
     bottom: 5px;
@@ -373,6 +251,21 @@
   .work-dropdown:hover .dropdown-trigger::after {
     opacity: 1;
     transform: translateX(-50%) scale(0.6) rotate(180deg);
+  }
+  
+  .work-dropdown .dropdown-trigger .cipher-text {
+    opacity: 0.8;
+    transition: opacity 0.3s ease, color 0.3s ease;
+  }
+  
+  .work-dropdown:hover .dropdown-trigger .cipher-text {
+    opacity: 1;
+    color: var(--accent-cyan, #00f5ff);
+  }
+  
+  .work-dropdown .dropdown-trigger[aria-expanded="true"] .cipher-text {
+    color: var(--accent-cyan, #00f5ff);
+    opacity: 1;
   }
 }
 

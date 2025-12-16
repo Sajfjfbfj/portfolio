@@ -18,13 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // モバイルの場合は閉じるボタンを表示
     if (window.innerWidth <= 768 && closeMenuBtn) {
       closeMenuBtn.classList.add('visible');
-      // モバイルでスクロールを無効化
       document.body.style.overflow = 'hidden';
     }
   }
 
   // ドロップダウンを閉じる
-  function closeDropdown() {
+  function closeDropdown(callback) {
     if (dropdownMenu && dropdownBtn) {
       dropdownMenu.classList.remove('active');
       dropdownBtn.setAttribute('aria-expanded', 'false');
@@ -36,6 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // スクロールを有効化
       document.body.style.overflow = '';
+      
+      // アニメーションが完了してからコールバックを実行
+      setTimeout(() => {
+        if (typeof callback === 'function') {
+          callback();
+        }
+      }, 300); // CSSのトランジション時間（0.3s）に合わせる
       
       return true;
     }
@@ -80,8 +86,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // メニュー項目クリックで閉じる
   const menuItems = dropdownMenu.querySelectorAll('a');
   menuItems.forEach(item => {
-    item.addEventListener('click', () => {
-      closeDropdown();
+    item.addEventListener('click', (e) => {
+      // デフォルトの動作を防ぐ
+      e.preventDefault();
+      const targetUrl = item.getAttribute('href');
+      
+      // ドロップダウンを閉じてから遷移
+      closeDropdown(() => {
+        window.location.href = targetUrl;
+      });
     });
   });
 

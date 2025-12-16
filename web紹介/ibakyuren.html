@@ -3,13 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, viewport-fit=cover" />
-  <title>茨城県弓道連盟（模倣）</title>
+  <title>茨城県弓道連盟 紹介</title>
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
+  
+  <!-- External Libraries -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf_viewer.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="../css/dropdown.css">
+  <link rel="stylesheet" href="../css/project-page.css">
 </head>
 <body>
   <!-- ナビゲーション -->
@@ -35,9 +42,10 @@
           id="workDropdown" 
           role="menu" 
           aria-labelledby="workDropdownBtn">
+          <button class="close-menu-btn" id="closeMenuBtn" aria-label="メニューを閉じる">✕</button>
           <li role="none"><a href="../index.html#work" class="dropdown-item" role="menuitem">All Works</a></li>
           <li role="none"><a href="enteki.html" class="dropdown-item" role="menuitem">MATOMA-遠的</a></li>
-          <li role="none"><a href="ibakyuren.html" class="dropdown-item active" role="menuitem">茨城県弓道連盟（試作）</a></li>
+          <li role="none"><a href="ibakyuren.html" class="dropdown-item active" role="menuitem">茨城県弓道連盟(試作)</a></li>
           <li role="none"><a href="ryusyokai.html" class="dropdown-item" role="menuitem">龍翔会</a></li>
         </ul>
       </div>
@@ -63,9 +71,45 @@
       Your browser does not support the video tag.
     </video>
 
-    <!-- ここにページ固有のコンテンツを追加 -->
-    <div class="content">
-      <!-- 既存のコンテンツをここに移動 -->
+    <div class="content project-intro">
+      <div class="container">
+        <h1>茨城県弓道連盟</h1>
+        <p class="project-url">URL: <a href="https://ibakyuren.vercel.app/" target="_blank">https://ibakyuren.vercel.app/</a></p>
+        
+        <section class="project-overview">
+          <h2>サイト概要</h2>
+          <p>このデザインは茨城県弓道連盟のウェブサイトを参考に、私が独自に再構成したデザイン案です。弓道愛好家や関係者にとって使いやすい情報発信プラットフォームを目指し、大会情報や審査情報、講習会情報など、必要な情報が整理された構成となっています。</p>
+          
+          <div class="features">
+            <h3>主な機能</h3>
+            <ul>
+              <li>大会情報の公開（日程、要項、結果）</li>
+              <li>昇段審査に関する情報と申込方法</li>
+              <li>講習会・研修会の案内</li>
+              <li>年間予定表の公開</li>
+              <li>お知らせと更新情報</li>
+              <li>組織図と連絡先情報</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="project-details">
+          <h2>技術スタック</h2>
+          <ul>
+            <li>コア技術: HTML5, CSS3, JavaScript</li>
+            <li>フレームワーク: Next.js (Vercel ホスティング)</li>
+            <li>スタイリング: CSS Modules または Styled Components</li>
+            <li>ホスティング: Vercel</li>
+            <li>特徴: レスポンシブデザイン、静的サイト生成(SSG)</li>
+          </ul>
+        </section>
+
+        <section class="project-conclusion">
+          <h2>まとめ</h2>
+          <p>このデザイン案は、伝統的な弓道の精神性を現代的なWebデザインで表現することを目指しました。情報の見やすさとアクセシビリティに配慮しつつ、弓道の荘厳さを感じさせるデザインを心がけました。特に、モバイルファーストのレスポンシブデザインを採用し、あらゆるデバイスでの快適な閲覧を実現しています。</p>
+          <p>実際のサイトは<a href="https://ibakyuren.vercel.app/" target="_blank">こちら</a>からご覧いただけます。</p>
+        </section>
+      </div>
     </div>
   </main>
 
@@ -85,17 +129,13 @@
       <div class="footer-section">
         <h4>Connect</h4>
         <div class="social-links">
-          <a href="#" class="social-icon" style="--ink-color: #00f0ff">
-            <span>Twitter</span>
-            <div class="ink-splat"></div>
+          <a href="https://x.com/matoma03_matoma" target="_blank" class="social-icon" style="--ink-color: #000000">
+            <img src="../images/Xicon/logo-white.png" alt="X (Twitter)" style="width: 24px; height: 24px; vertical-align: middle;">
+            <span>X (Twitter)</span>
           </a>
-          <a href="#" class="social-icon" style="--ink-color: #ff00aa">
-            <span>GitHub</span>
-            <div class="ink-splat"></div>
-          </a>
-          <a href="#" class="social-icon" style="--ink-color: #a0ff00">
-            <span>Instagram</span>
-            <div class="ink-splat"></div>
+          <a href="mailto:sakisuzuki89@gmail.com?subject=お問い合わせ&body=お問い合わせ内容をご記入ください" class="social-icon" style="--ink-color: #ea4335" target="_blank" rel="noopener noreferrer">
+            <img src="../images/GMAIL/icons8-gmail-新しい-48.png" alt="Gmail" style="width: 24px; height: 24px; vertical-align: middle;">
+            <span>Gmail</span>
           </a>
         </div>
       </div>
@@ -107,6 +147,7 @@
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script src="../main.js"></script>
   <script src="../js/typingAnimation.js"></script>
   <script src="../js/dropdown.js" defer></script>

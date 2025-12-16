@@ -1,0 +1,63 @@
+/**
+ * profile.css
+ * プロフィールセクションスタイル
+ * 作成日: 2025-12-16
+ */
+
+/* ========================================
+   Profile Styles
+   ======================================== */
+
+.profile-content {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.profile-image {
+  flex: 0 0 280px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.profile-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-text {
+  flex: 1;
+  color: #ccc;
+}
+
+.profile-text h3 {
+  color: #fff;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+.profile-text p {
+  line-height: 1.8;
+  margin-bottom: 20px;
+  font-size: 0.95em;
+}
+
+/* ========================================
+   レスポンシブ対応
+   ======================================== */
+
+@media (max-width: 768px) {
+  .profile-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .profile-image {
+    flex: 0 0 180px;
+    height: 180px;
+  }
+}
