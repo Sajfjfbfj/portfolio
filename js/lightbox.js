@@ -116,20 +116,28 @@
     function navigate(direction) {
       if (isAnimating) return;
       
-      const images = Array.from(document.querySelectorAll('.lightbox-trigger'));
-      if (images.length <= 1) return;
+      // Get all lightbox triggers that are currently visible (not filtered out)
+      const allImages = Array.from(document.querySelectorAll('.lightbox-trigger'));
+      const visibleImages = allImages.filter(img => {
+        // Get the parent work-card element
+        const card = img.closest('.work-card');
+        // Only include if the card is visible (not filtered out)
+        return card && window.getComputedStyle(card).display !== 'none';
+      });
       
-      let currentIndex = currentImage ? images.indexOf(currentImage) : -1;
+      if (visibleImages.length <= 1) return;
+      
+      let currentIndex = currentImage ? visibleImages.indexOf(currentImage) : -1;
       
       if (direction === 'next') {
-        currentIndex = (currentIndex + 1) % images.length;
+        currentIndex = (currentIndex + 1) % visibleImages.length;
       } else {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        currentIndex = (currentIndex - 1 + visibleImages.length) % visibleImages.length;
       }
       
       // Only navigate if different from current image
-      if (currentIndex !== images.indexOf(currentImage)) {
-        openModal(images[currentIndex]);
+      if (currentIndex >= 0 && visibleImages[currentIndex] !== currentImage) {
+        openModal(visibleImages[currentIndex]);
       }
     }
 
